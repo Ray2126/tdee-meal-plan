@@ -13,6 +13,11 @@ const InputForm = (props: IInputFormProps) => {
     setSex(sex);
   };
 
+  const [age, setAge] = useState<number>(18);
+  const handleAgeChange = (age: number) => {
+    setAge(age);
+  };
+
   const [height, setHeight] = useState<number>(180);
   const handleHeightChange = (height: number) => {
     setHeight(height);
@@ -39,6 +44,7 @@ const InputForm = (props: IInputFormProps) => {
     if (event.currentTarget.checkValidity() === true) {
       let UserInput: IUserInput = {
         sex: sex,
+        age: age,
         height: height,
         weight: weight,
         activity: activity,
@@ -54,7 +60,7 @@ const InputForm = (props: IInputFormProps) => {
     <Container>
       <Form inline noValidate validated={validated} onSubmit={handleSubmit}>
         <Row>
-          <Col xs={12}>
+          <Col xs={4}>
             <Form.Group controlId="formSex" className="mb-3">
               <Form.Label className="mr-2">Choose sex: </Form.Label>
               <Form.Control
@@ -66,6 +72,17 @@ const InputForm = (props: IInputFormProps) => {
                 <option>Male</option>
                 <option>Female</option>
               </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col xs={8}>
+            <Form.Group controlId="formAge" className="mb-3">
+              <Form.Label className="mr-2">Enter age (yrs):</Form.Label>
+              <Form.Control
+                type="number"
+                required
+                value={age}
+                onChange={(e) => handleAgeChange(parseInt(e.target.value))}
+              />
             </Form.Group>
           </Col>
           <Col>
